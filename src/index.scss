@@ -1,0 +1,81 @@
+.Signature-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+
+  width: 100vw;
+  height: 100vh;
+
+  background: #fff;
+}
+
+.Signature {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+
+  width: 100%;
+  height: 100%;
+  padding: 12px 10px;
+
+  background-color: #ffffff;
+
+  &-title {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-40%, -50%);
+
+    color: #5470a4;
+    font-family: PingFang HK;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: 16px;
+  }
+
+  &-canvas {
+    width: 100%;
+    height: calc(100% - 40px);
+
+    border-radius: 8px;
+    background: #e9e9e9;
+  }
+
+  &-buttonGoup {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 24px;
+
+    width: 100%;
+    height: 28px;
+
+    > div {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      column-gap: 12px;
+      padding: 6px 14px;
+
+      border-radius: 4px;
+      background: #5570a4;
+
+      color: #fff;
+      font-family: PingFang HK;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 16px;
+      letter-spacing: 0.7px;
+      white-space: nowrap;
+
+      &:last-child:not(:nth-child(1)) {
+        background: #534fff;
+      }
+    }
+  }
+}

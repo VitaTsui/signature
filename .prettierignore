@@ -1,0 +1,8 @@
+.gitignore
+.prettierignore
+dist/*
+es/*
+lib/*
+build/*
+yarn.lock
+*.js
