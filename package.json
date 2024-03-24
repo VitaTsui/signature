@@ -1,6 +1,6 @@
 {
   "name": "@hsu-react/signature",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A React Signature Component",
   "license": "MIT",
   "repository": "git@github.com:VitaTsui/signature.git",
