@@ -3,12 +3,20 @@ import ReactDOM from 'react-dom'
 import './index.scss'
 
 export interface SProps {
+  /** Confirm callback; `src` is the signature image dataURL, `blob` is the matching PNG Blob */
   onConfirm?: (src: string, blob: Blob | null) => void
+  /** Cancel callback */
   onCancel?: () => void
+  /** Write in landscape mode (canvas rotated 90°), defaults to false */
   horizontal?: boolean
+  /** Whether the signature pad is visible, defaults to false */
   visible?: boolean
 }
 
+/**
+ * Fullscreen handwritten signature pad. Rendered into document.body via a Portal,
+ * supports portrait / landscape writing, and exports the signature image through onConfirm.
+ */
 const Signature: React.FC<SProps> = (props) => {
   const { onConfirm, horizontal, visible, onCancel } = props
   const ref = useRef<HTMLDivElement>(null)
@@ -50,7 +58,7 @@ const Signature: React.FC<SProps> = (props) => {
         canvas.addEventListener('touchstart', function (event: TouchEvent) {
           setDraw(true)
 
-          event.preventDefault() // 阻止在canvas画布上签名的时候页面跟着滚动
+          event.preventDefault() // Prevent the page from scrolling while signing on the canvas
 
           const touches = event.touches[0]
           beginX = touches.clientX - signature.offsetLeft
@@ -63,7 +71,7 @@ const Signature: React.FC<SProps> = (props) => {
         })
 
         canvas.addEventListener('touchmove', function (event: TouchEvent) {
-          event.preventDefault() // 阻止在canvas画布上签名的时候页面跟着滚动
+          event.preventDefault() // Prevent the page from scrolling while signing on the canvas
 
           const touches = event.touches[0]
           let stopX = touches.clientX - signature.offsetLeft
@@ -75,7 +83,7 @@ const Signature: React.FC<SProps> = (props) => {
           }
 
           writing(beginX, beginY, stopX, stopY, ctx)
-          beginX = stopX // 这一步很关键，需要不断更新起点，否则画出来的是射线簇
+          beginX = stopX // Crucial: keep updating the start point, otherwise strokes fan out as rays from one origin
           beginY = stopY
 
           setDrawed(true)
@@ -97,15 +105,16 @@ const Signature: React.FC<SProps> = (props) => {
     })
   }, [canvas])
 
+  // Draw one stroke segment from (beginX, beginY) to (stopX, stopY)
   const writing = (beginX: number, beginY: number, stopX: number, stopY: number, ctx: CanvasRenderingContext2D) => {
-    ctx.beginPath() // 开启一条新路径
-    ctx.globalAlpha = 1 // 设置图片的透明度
-    ctx.lineWidth = 3 // 设置线宽
-    ctx.strokeStyle = 'black' // 设置路径颜色
-    ctx.moveTo(beginX, beginY) // 从(beginX, beginY)这个坐标点开始画图
-    ctx.lineTo(stopX, stopY) // 定义从(beginX, beginY)到(stopX, stopY)的线条（该方法不会创建线条）
-    ctx.closePath() // 创建该条路径
-    ctx.stroke() // 实际地绘制出通过 moveTo() 和 lineTo() 方法定义的路径。默认颜色是黑色。
+    ctx.beginPath()
+    ctx.globalAlpha = 1
+    ctx.lineWidth = 3
+    ctx.strokeStyle = 'black'
+    ctx.moveTo(beginX, beginY)
+    ctx.lineTo(stopX, stopY)
+    ctx.closePath()
+    ctx.stroke()
   }
 
   const confirm = () => {
