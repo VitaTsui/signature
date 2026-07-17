@@ -1,9 +1,20 @@
 {
   "name": "@hsu-react/signature",
   "version": "0.0.3",
-  "description": "A React Signature Component",
+  "description": "React 手写签名板组件，支持横竖屏与图片导出",
+  "keywords": [
+    "react",
+    "signature",
+    "signature-pad",
+    "canvas",
+    "handwriting"
+  ],
   "license": "MIT",
-  "repository": "git@github.com:VitaTsui/signature.git",
+  "homepage": "https://github.com/VitaTsui/signature#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VitaTsui/signature.git"
+  },
   "author": "VitaHsu <vitahsu7@gmail.com>",
   "main": "lib/index.js",
   "module": "es/index.js",
