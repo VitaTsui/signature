@@ -1,6 +1,6 @@
 {
   "name": "@hsu-react/signature",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "React 手写签名板组件，支持横竖屏与图片导出",
   "keywords": [
     "react",
